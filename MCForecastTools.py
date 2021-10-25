@@ -90,10 +90,15 @@ class MCSimulation:
         portfolio_cumulative_returns = pd.DataFrame()
         
         # Run the simulation of projecting stock prices 'nSim' number of times
+        print(f"Running Monte Carlo simulation number:")
         for n in range(self.nSim):
         
-            if n % 10 == 0:
-                print(f"Running Monte Carlo simulation number {n}.")
+            # Reduce screen clutter by showing loop progress on the same line,
+            # with a newline every 100 loops. 
+            if n > 0 and n % 10 == 0:
+                print(f"{n: >4} ", end='', flush=True)
+                if n % 100 == 0:
+                    print('')
         
             # Create a list of lists to contain the simulated values for each stock
             simvals = [[p] for p in last_prices]
@@ -115,6 +120,9 @@ class MCSimulation:
     
             # Calculate the normalized, cumulative return series
             portfolio_cumulative_returns[n] = (1 + sim_df.fillna(0)).cumprod()
+
+        # Show that nSim count was reachedwhich also adds a needed newline
+        print(self.nSim)
         
         # Set attribute to use in plotting
         self.simulated_return = portfolio_cumulative_returns
