@@ -121,8 +121,8 @@ class MCSimulation:
             # Calculate the normalized, cumulative return series
             portfolio_cumulative_returns[n] = (1 + sim_df.fillna(0)).cumprod()
 
-        # Show that nSim count was reachedwhich also adds a needed newline
-        print(self.nSim)
+        # Show that nSim count was reached, which also adds a needed newline
+        print(f"{self.nSim: >4}")
         
         # Set attribute to use in plotting
         self.simulated_return = portfolio_cumulative_returns
